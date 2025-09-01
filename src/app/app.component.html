@@ -1,0 +1,30 @@
+<div class="app-shell">
+  <aside class="sidebar">
+    <nav>
+      <ul>
+        <li *ngFor="let tab of tabs; let i = index" [class.active]="i === selectedIndex">
+          <button type="button" (click)="setIndex(i)">
+            {{ tab.title }}
+          </button>
+        </li>
+      </ul>
+    </nav>
+    <div class="download-wrap">
+      <button class="download-btn" (click)="downloadPdf()">Download PDF of all tabs</button>
+    </div>
+  </aside>
+
+  <main class="content">
+    <section class="tab-area">
+      <div class="tab-content" *ngIf="selectedIndex === 0">
+        <h2>Simple Pie Chart</h2>
+        <p>This tab includes a pie chart rendered with Chart.js.</p>
+<div width="600" height="360">
+        <canvas #pieCanvas  style="border-radius:8px;"></canvas>
+
+</div>
+      </div>
+      <div class="tab-content" *ngIf="selectedIndex !== 0" [innerHTML]="tabs[selectedIndex].html"></div>
+    </section>
+  </main>
+</div>

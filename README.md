@@ -1,59 +1,104 @@
-# MyAngularConcepts
+📄 Tabs-to-PDF Project
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.3.
+A simple Angular application that demonstrates how to render tab-based content, including Chart.js visualizations, and export them to PDF using jsPDF and html2canvas.
+The project also includes SCSS-based styling for a clean, modular UI.
 
-## Development server
+🚀 Features
 
-To start a local development server, run:
+Tabbed Layout
 
-```bash
+3 tabs:
+
+Tab 1 → Contains a Pie Chart (Chart.js).
+
+Tab 2 → Contains text and images.
+
+Tab 3 → Contains additional custom content.
+
+PDF Export
+
+Download content of each tab as PDF.
+
+Supports charts, text, and images.
+
+Proper page-wise rendering with titles.
+
+Styling
+
+Written in SCSS instead of inline styles.
+
+Scoped class-based design for tabs and content.
+
+🛠️ Tech Stack
+
+Angular
+
+Chart.js
+
+jsPDF
+
+html2canvas
+
+SCSS (modular styling)
+
+📂 Project Structure
+src/
+ ├── app/
+ │   ├── components/
+ │   │   ├── tabs/          # Tab navigation & content
+ │   │   ├── pdf.service.ts # PDF export logic
+ │   │   └── chart/         # Chart.js Pie Chart
+ │   ├── styles/            # Global SCSS styles
+ │   └── app.component.ts
+ ├── assets/                # Static images
+ └── index.html
+
+⚙️ Installation
+
+Clone the repository:
+
+git clone https://github.com/your-username/tabs-to-pdf.git
+cd tabs-to-pdf
+
+
+Install dependencies:
+
+npm install
+
+
+Run the development server:
+
 ng serve
-```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
+Open your browser:
+👉 http://localhost:4200
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+📸 Screenshots
+Tab Layout
 
-```bash
-ng generate component component-name
-```
+(screenshot of tabs UI)
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+Pie Chart in Tab 1
 
-```bash
-ng generate --help
-```
+(screenshot of pie chart)
 
-## Building
+Exported PDF
 
-To build the project run:
+(screenshot of downloaded PDF)
 
-```bash
-ng build
-```
+🧑‍💻 Usage
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Navigate between tabs.
 
-## Running unit tests
+Click "Download PDF" to export the content of the currently active tab.
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Works with charts, text, and images.
 
-```bash
-ng test
-```
+🐛 Troubleshooting
 
-## Running end-to-end tests
+If PDF fails to download from Tab 2 or Tab 3, ensure:
 
-For end-to-end (e2e) testing, run:
+Images are base64 encoded or properly referenced from assets/.
 
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+The content is fully rendered in the DOM before calling PDF export.

@@ -1,0 +1,384 @@
+/* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+:root {
+  --bg: #f6fbff;
+  --card: #ffffff;
+  --muted: #6b7280;
+  --accent: #6aa6ff;
+  --accent-2: #7ad3c0;
+  --text: #0f172a;
+  --shadow: rgba(10,30,60,0.06);
+}
+
+/* Reset / base */
+* { box-sizing: border-box; }
+html, body, app-root { height: 100%; margin: 0; }
+body {
+  font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.4;
+}
+
+/* Shell layout: 30 / 70 split */
+.app-shell {
+  display: flex;
+  min-height: 100vh;
+  background: var(--bg);
+  gap: 0;
+}
+
+/* Sidebar (left 30%) */
+.sidebar {
+  width: 30%;
+  min-width: 220px;
+  background: linear-gradient(180deg, #f3fbff, #fbfdfb);
+  padding: 24px;
+  border-right: 1px solid rgba(0,0,0,0.04);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Tab list */
+.sidebar nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.sidebar nav li {
+  margin-bottom: 12px;
+}
+.sidebar nav button {
+  width: 100%;
+  text-align: left;
+  padding: 12px 16px;
+  border-radius: 12px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 15px;
+  color: var(--text);
+  transition: transform .08s ease, box-shadow .12s ease, background .12s ease;
+}
+.sidebar nav button:hover,
+.sidebar nav button:focus {
+  transform: translateY(-1px);
+  outline: none;
+  box-shadow: 0 6px 18px var(--shadow);
+}
+.sidebar nav li.active button {
+  background: linear-gradient(90deg, var(--accent), var(--accent-2));
+  color: white;
+  box-shadow: 0 6px 18px rgba(106,166,255,0.12);
+}
+
+/* Download CTA */
+.download-wrap { margin-top: 24px; }
+.download-btn {
+  width: 100%;
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  background: #0b6cff;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+  box-shadow: 0 8px 22px rgba(11,108,255,0.14);
+  transition: transform .12s ease, box-shadow .12s ease, opacity .12s ease;
+}
+.download-btn:hover { transform: translateY(-2px); }
+.download-btn:active { transform: translateY(0); opacity: .95; }
+
+/* Main content (right 70%) */
+.content {
+  width: 70%;
+  padding: 36px;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+.tab-area {
+  background: var(--card);
+  padding: 24px;
+  border-radius: 16px;
+  box-shadow: 0 6px 30px var(--shadow);
+  width: 100%;
+  max-width: 980px;
+}
+.tab-content h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  font-size: 24px;
+}
+.tab-content p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0 0 12px 0;
+  font-size: 15px;
+}
+.tab-content a {
+  color: var(--accent);
+  text-decoration: underline;
+}
+.tab-content img {
+  margin-top: 12px;
+  border-radius: 10px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  box-shadow: 0 8px 20px rgba(15,23,42,0.04);
+}
+
+/* Make sure long content doesn't break layout */
+.tab-content pre,
+.tab-content code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, "Roboto Mono", monospace;
+  background: #f7fafc;
+  padding: 8px;
+  border-radius: 8px;
+  overflow: auto;
+}
+
+/* Small helper for page breaks when generating PDF */
+.tab-page {
+  page-break-after: always;
+  -webkit-column-break-after: always;
+  break-after: page;
+}
+
+/* Responsive: stack on narrow screens */
+@media (max-width: 900px) {
+  .app-shell {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    padding: 12px;
+    border-right: none;
+    border-bottom: 1px solid rgba(0,0,0,0.04);
+    gap: 12px;
+  }
+
+  /* Make tabs horizontally scrollable on mobile */
+  .sidebar nav ul {
+    display: flex;
+    gap: 8px;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  .sidebar nav li { margin-bottom: 0; flex: 0 0 auto; }
+  .sidebar nav button {
+    white-space: nowrap;
+    padding: 10px 14px;
+    border-radius: 10px;
+    font-size: 14px;
+  }
+
+  /* Keep download button visible but smaller */
+  .download-wrap { margin-top: 0; margin-left: auto; }
+  .download-btn {         padding: 5px 8px;
+        font-size: 11px;
+        border-radius: 10px; }
+
+  .content { width: 100%; padding: 18px; }
+  .tab-area { padding: 18px; border-radius: 12px; }
+}
+
+/* Very narrow: stack the sidebar items vertically again (accessibility) */
+@media (max-width: 420px) {
+  .sidebar nav ul { flex-direction: column; }
+  .sidebar nav li { width: 100%; }
+  .sidebar nav button { width: 100%; }
+}
+
+/* Focus outlines for keyboard users */
+button:focus {
+  outline: 3px solid rgba(106,166,255,0.22);
+  outline-offset: 2px;
+}
+
+/* Print adjustments (if user prints page) */
+@media print {
+  .sidebar, .download-wrap, .download-btn { display: none !important; }
+  .content { width: 100% !important; padding: 0; }
+  .tab-area { box-shadow: none; border-radius: 0; padding: 0; }
+}
+
+.profile-card-wrapper {
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.profile-header {
+  background: linear-gradient(90deg, #ff6aa0, #ff8d6b);
+  height: 130px;
+  border-radius: 18px 18px 0 0;
+  position: relative;
+}
+
+.profile-card {
+  background: #ffffff;
+  padding: 28px;
+  border-radius: 18px;
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06);
+  position: relative;
+  top: -60px;
+}
+
+.profile-avatar {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 34px;
+  color: #333;
+  margin: -70px auto 12px;
+  box-shadow: 0 18px 40px rgba(15, 23, 42, 0.08);
+}
+
+.profile-name {
+  text-align: center;
+  margin: 8px 0 4px;
+  font-size: 28px;
+  color: #333;
+  letter-spacing: 0.2px;
+}
+
+.profile-location {
+  text-align: center;
+  color: #8b93a3;
+  margin-bottom: 12px;
+  font-size: 14px;
+}
+
+.profile-role {
+  text-align: center;
+  color: #5b6470;
+  margin: 8px 0 22px;
+  line-height: 1.6;
+}
+
+.profile-stats {
+  width: 100%;
+  text-align: center;
+  border-collapse: collapse;
+  margin-bottom: 22px;
+
+  td {
+    width: 33%;
+    vertical-align: middle;
+  }
+
+  .stat-value {
+    font-weight: 800;
+    font-size: 20px;
+    color: #2d3748;
+  }
+
+  .stat-label {
+    color: #8b93a3;
+    font-size: 13px;
+  }
+}
+
+.profile-cta {
+  text-align: center;
+}
+
+.btn-show-more {
+  display: inline-block;
+  padding: 12px 34px;
+  border-radius: 28px;
+  font-weight: 700;
+  text-decoration: none;
+  color: #ffffff;
+  background: linear-gradient(90deg, #ff6aa0, #ff8d6b);
+  box-shadow: 0 10px 30px rgba(255, 106, 160, 0.18);
+}
+
+
+.social-cards {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 30px auto;
+  max-width: 1000px;
+  flex-wrap: wrap;
+}
+
+.social-cards .card {
+  flex: 1 1 280px;
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 24px;
+  text-align: center;
+  background: #fff;
+  transition: transform 0.2s ease;
+}
+
+.social-cards .card:hover {
+  transform: translateY(-6px);
+}
+
+.social-cards .card .icon {
+  font-size: 40px;
+  margin-bottom: 16px;
+}
+
+.social-cards .card h3 {
+  font-size: 20px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+
+.social-cards .card p {
+  font-size: 14px;
+  color: #444;
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.social-cards .card .btn {
+  display: inline-block;
+  padding: 10px 24px;
+  border-radius: 20px;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+/* Card-specific styles */
+.social-cards .twitter .btn {
+  background: #000;
+  color: #fff;
+}
+
+.social-cards .instagram {
+  background: #e91e63;
+  color: #fff;
+}
+
+.social-cards .instagram .btn {
+  background: #fff;
+  color: #e91e63;
+}
+
+.social-cards .youtube .btn {
+  background: #000;
+  color: #fff;
+}
