@@ -129,9 +129,9 @@ export class AppComponent implements AfterViewInit, OnDestroy {
   resize(chart: any, size: any) {
     // Adjust padding dynamically based on size
     chart.options.layout = {
-      padding: {
+      padding: {  
         left: 0,
-        right: size.width < 600 ? 50 : 400, // responsive padding
+        right: size.width < 800 ? 50 : 500, // responsive padding
       },
     };
     chart.update();
